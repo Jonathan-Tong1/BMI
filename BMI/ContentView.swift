@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var height = 0.0
+    @State private var weight = 0.0
+    
+    var bmicalculation: Double {
+        let bmi = Double((weight) / (height * height))
+        return bmi
+    }
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack{
+            Form {
+                Section("How tall are you? (m^2)"){
+                    TextField("Height",value: $height, format: .number)
+                }
+                Section("How much do you weight? (kg)"){
+                    TextField("Weight",value: $weight, format: .number)
+                }
+            }
+            
+            Section(){
+                TextField(bmicalculation,format:.number)
+            }
+            .navigationTitle("BMI Calculator")
         }
-        .padding()
     }
 }
 
